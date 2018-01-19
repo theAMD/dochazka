@@ -1,0 +1,6 @@
+Django==1.11
+django-all-access
+django-autocomplete-light
+mock
+django-widget-tweaks
+google-api-python-client

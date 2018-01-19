@@ -1,0 +1,59 @@
+.row .col-md-4 {
+    margin-bottom: 5px;
+}
+
+.day {
+ height: 200px;
+}
+
+.event-link {
+    width: 100%;
+    padding: 0px;
+}
+
+.event {
+    text-align: left;
+    padding: 0px 5px;
+}
+
+@media screen and (max-width: 480px) {
+    .event {
+        width: 100%;
+        padding: 1px;
+        margin-right: auto;
+        margin-left: auto;
+        overflow: hidden;
+
+    }
+}
+
+.day {
+    padding: 0px !important;
+}
+.day-container {
+
+}
+
+.event {
+    padding: 0px;
+    padding-left: 4px;
+    margin-bottom: 2px;
+    width: 100%;
+}
+
+.event-dot {
+    border-radius: 8px;
+    border: 4px solid;
+    height: 0;
+    width: 0;
+    float: left;
+    margin-right: 6px;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(90%);
+}
+
+.multiday {
+     color: white
+}

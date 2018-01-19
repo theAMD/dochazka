@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block body %}
+{#  <nav class="navbar navbar-default">#}
+{#      <div class="container-fluid">#}
+{#        <div class="navbar-header">#}
+{#          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">#}
+{#            <span class="sr-only">Toggle navigation</span>#}
+{#            <span class="icon-bar"></span>#}
+{#            <span class="icon-bar"></span>#}
+{#            <span class="icon-bar"></span>#}
+{#          </button>#}
+{#          <a class="navbar-brand" href="#">GENOCIDE</a>#}
+{#        </div>#}
+{##}
+{#        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+{#          <ul class="nav navbar-nav">#}
+{#            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
+{#            <li><a href="#">Link</a></li>#}
+{#          </ul>#}
+{##}
+{#          <ul class="nav navbar-nav navbar-right">#}
+{#            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>#}
+{#                <ul class="dropdown-menu" role="menu">#}
+{#                    <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>#}
+{#                    <li><a href="#"><i class="fa fa-group"></i> Identity manager</a></li>#}
+{#                    <li class="divider"></li>#}
+{#                    <li><a href="#"><i class="fa fa-sliders"></i> Admin</a></li>#}
+{#                    <li class="divider"></li>#}
+{#                    <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>#}
+{#                  </ul>#}
+{#            </li>#}
+{#          </ul>#}
+{#        </div>#}
+{#      </div>#}
+{#    </nav>#}
+{##}
+{#    <div class="left-menu pull-left" style="width: 10vw; border-width: 0px 1px 0px 0px; border-color: grey; border-style: solid; background-color: #f8f8f8; bottom: 0px">#}
+{#        <ul>#}
+{#            <li>menu</li>#}
+{#            <li>menu</li>#}
+{#        </ul>#}
+{#    </div>#}
+{##}
+{#    <div class="pull-left" style="">#}
+{#        {% block content %}{% endblock %}#}
+{#    </div>#}
+
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
+    <a class="navbar-brand" href="{% url 'home' %}">Docházka</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        {% include 'menu.html' %}
+
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="" class="nav-link" role="button">{{ context.user }}</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false">{{ request.user }}</a>
+                <ul class="dropdown-menu dropdown-menu-right sidenav-second-level" role="menu">
+                    {% if request.user.is_staff %}
+                    <li><a href="#"><i class="fa fa-group"></i> Identity manager</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'admin:index' %}"><i class="fa fa-sliders"></i> Admin</a></li>
+                    <li class="divider"></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                  </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+      <div class="container-fluid content">
+            {% block content %}{% endblock %}
+      </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>88oddil.cz</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

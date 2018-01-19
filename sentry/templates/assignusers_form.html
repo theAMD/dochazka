@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block body %}
+    {% with formset=form %}
+        {% for form in formset %}
+            {{ form.instance.username }}:
+            {{ form }}
+            <br />
+        {% endfor %}
+    {% endwith %}
+{% endblock %}
+
+
+{% block footer %}
+    {{ form.media }}
+{% endblock %}

@@ -1,0 +1,95 @@
+{#      <ul class="navbar-nav navbar-sidenav" id="left-menu">#}
+{#        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">#}
+{#          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">#}
+{#            <i class="fa fa-fw fa-file"></i>#}
+{#            <span class="nav-link-text">Example Pages</span>#}
+{#          </a>#}
+{#          <ul class="sidenav-second-level collapse" id="collapseExamplePages">#}
+{#            <li>#}
+{#              <a href="login.html">Login Page</a>#}
+{#            </li>#}
+{#            <li>#}
+{#              <a href="register.html">Registration Page</a>#}
+{#            </li>#}
+{#            <li>#}
+{#              <a href="forgot-password.html">Forgot Password Page</a>#}
+{#            </li>#}
+{#            <li>#}
+{#              <a href="blank.html">Blank Page</a>#}
+{#            </li>#}
+{#          </ul>#}
+{#        </li>#}
+{#        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">#}
+{#          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">#}
+{#            <i class="fa fa-fw fa-sitemap"></i>#}
+{#            <span class="nav-link-text">Menu Levels</span>#}
+{#          </a>#}
+{#          <ul class="sidenav-second-level collapse" id="collapseMulti">#}
+{#            <li>#}
+{#              <a href="#">Second Level Item</a>#}
+{#            </li>#}
+{#            <li>#}
+{#              <a href="#">Second Level Item</a>#}
+{#            </li>#}
+{#            <li>#}
+{#              <a href="#">Second Level Item</a>#}
+{#            </li>#}
+{#            <li>#}
+{#              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>#}
+{#              <ul class="sidenav-third-level collapse" id="collapseMulti2">#}
+{#                <li>#}
+{#                  <a href="#">Third Level Item</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                  <a href="#">Third Level Item</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                  <a href="#">Third Level Item</a>#}
+{#                </li>#}
+{#              </ul>#}
+{#            </li>#}
+{#          </ul>#}
+{#        </li>#}
+{#        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">#}
+{#          <a class="nav-link" href="#">#}
+{#            <i class="fa fa-fw fa-link"></i>#}
+{#            <span class="nav-link-text">Link</span>#}
+{#          </a>#}
+{#        </li>#}
+{#      </ul>#}
+
+<ul class="navbar-nav navbar-sidenav" id="left-menu">
+    {% for item in menu %}
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="{{ item.title }}">
+        <a {% if item.submenu %}class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSubMenu{{ forloop.counter }}" {% else %} class="nav-link" href="{{ item.url }}" {% endif %} data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-{{ item.icon }}"></i>
+            <span class="nav-link-text">{{ item.text|capfirst }}</span>
+        </a>
+        {% if item.submenu %}
+             <ul class="sidenav-second-level collapse" id="collapseSubMenu{{ forloop.counter }}">
+             {% with secondLevelId=forloop.counter %}
+                {% for subitem in item.submenu %}
+                <li>
+                  <a {% if subitem.submenu %}class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSub-{{ secondLevelId }}-{{ forloop.counter }}"{% else %}href="{{ subitem.url }}" {% endif %}>
+                      <i class="fa fa-fw fa-{{ subitem.icon }}"></i>
+                      {{ subitem.text|capfirst }}</a>
+                    {% if subitem.submenu %}
+                          <ul class="sidenav-third-level collapse" id="collapseSub-{{ secondLevelId }}-{{ forloop.counter }}">
+                        {% for subsubitem in subitem.submenu %}
+                            <li>
+                              <a href="{{ subsubitem.url }}"><i class="fa fa-fw fa-{{ subsubitem.icon }}"></i> {{ subsubitem.text|capfirst }}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+             {% endwith %}
+
+            </ul>
+        {% endif %}
+
+
+    </li>
+    {% endfor %}
+</ul>

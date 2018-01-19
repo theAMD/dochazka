@@ -1,0 +1,128 @@
+/* INPUTS */
+
+input {
+    border-width: 0px 0px 1px 0px !important;
+    border-color: grey !important;
+
+    border-radius: 0px !important;
+
+    -webkit-transition: border-color 0.5s ease-out;
+    -moz-transition: border-color 0.5s ease-out;
+    -o-transition: border-color 0.5s ease-out;
+    transition: border-color 0.5s ease-out;
+}
+
+.login-input {
+     text-align: center !important;
+}
+
+input:focus {
+    border-color: orangered !important;
+}
+
+.btn {
+    border-radius: 0px !important;
+}
+
+textarea {
+    border-color: orangered;
+    border-style: none solid;
+    border-width: 0px 1px;
+}
+
+
+
+/* BUTTONS */
+.success {
+    background-color: white;
+    color: #449d44;
+    border-color: #449d44 !important;
+    border-width: 0px 0px 1px 0px !important;
+
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+}
+
+.success:hover {
+    color: white !important;
+    background-color: #449d44 !important;
+
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+
+
+
+
+/* OTHERS */
+
+html {
+    font-size: medium;
+}
+
+.nav {
+    color: #777;
+}
+
+.navbar {
+    border-radius: 0px ;
+    border-width: 0px 0px 1px 0px;
+    border-color: orangered;
+    border-style: solid;
+
+}
+
+
+.motd-board {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+    width: 100vw;
+    text-align: center;
+}
+
+.motd-board-image {
+    width: 600px;
+    max-width: 90vw;
+}
+
+.content {
+    padding-bottom: 66px;
+}
+
+
+.form-group > input, textarea, select {
+    width: 100%;
+}
+
+.half-group {
+    width: 49%;
+    display: inline-block;
+}
+
+textarea, input, button {
+    outline: none;
+}
+
+
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+    background-color: orangered;
+}
+
+.bootstrap-datetimepicker-widget table td.today::before {
+    border-bottom-color: orangered;
+}
+
+a {
+    color: orangered;
+}
+
+.btn-paritcipant {
+    position: relative;
+    width: 100%;
+}
+
