@@ -28,24 +28,28 @@ def menu_generator(request):
     # ]
     today = date.today()
     menu = [
-        {'icon': 'tachometer', 'url': reverse('home'), 'text': 'dashing'},
+        {'icon': 'tachometer-alt', 'url': reverse('home'), 'text': 'dashing'},
 
     ]
 
-    calendars = [{
-            'icon': 'calendar',
-            'url': reverse('attendance:calendar', kwargs={'calendar_slug': 'personal'}),
-            'text': u'Můj kalendář'
-        }]
-    # for calendar in Calendar.objects.filter(unit__in=request.user.person.member_in_units()):
-    #     calendars.append({
-    #         'icon': 'calendar',
-    #         'url': reverse('attendance:calendar', kwargs={'calendar_slug': calendar.slug}),
-    #         'text': calendar.name
-    #     })
+    try:
+        if request.user.person:
+            calendars = [{
+                    'icon': 'calendar',
+                    'url': reverse('attendance:calendar', kwargs={'calendar_slug': 'personal'}),
+                    'text': u'Můj kalendář'
+                }]
+            for calendar in Calendar.objects.filter(unit__in=request.user.person.member_in_units()):
+                calendars.append({
+                    'icon': 'calendar',
+                    'url': reverse('attendance:calendar', kwargs={'calendar_slug': calendar.slug}),
+                    'text': calendar.name
+                })
 
-    menu.append(
-        {'icon': 'calendar', 'url': "#", 'text': u'Kalendáře', 'submenu': calendars }
-    )
+            menu.append(
+                {'icon': 'calendar', 'url': "#", 'text': u'Kalendáře', 'submenu': calendars }
+            )
+    except:
+        pass
 
     return {'menu': menu}

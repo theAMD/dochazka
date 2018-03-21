@@ -1,7 +1,6 @@
 from django.views.generic import DetailView, ListView, RedirectView, CreateView, UpdateView
 from attendance.models import Calendar, Event, Participation
 from .helpers import MonthHelper, EventHelper
-from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
 from forms import EventForm
@@ -89,4 +88,6 @@ class EventEditView(UpdateView):
 
     def get_success_url(self):
         calendar = Calendar.objects.filter(pk=self.request.POST.get('calendar')).get()
+        calendar.color = "green";
+        calendar.save()
         return reverse("attendance:monthCalendar", kwargs={'calendar_slug': calendar.slug, 'year': self.object.start.strftime("%Y"), 'month': self.object.start.strftime("%m")})

@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'o9)4ww8=z7$$m9=!si^7#o8n-%iz0g0fbb8lmrzer@3ut@q7aw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.0.157', 'localhost']
+ALLOWED_HOSTS = ['localhost', 'dochazka-88oddil.herokuapp.com']
 # Application definition
 
 
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party packages
     'allaccess',
-    'djangobower',
+    # 'djangobower',
     'widget_tweaks',
     # own packages
     'attendance',
@@ -81,17 +81,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'main.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
@@ -150,3 +139,6 @@ LOGIN_URL = '/login'
 ADMIN_LOGIN_URL = 'login/'
 
 AUTH_USER_MODEL = 'sentry.User'
+
+import django_heroku
+django_heroku.configure(locals())

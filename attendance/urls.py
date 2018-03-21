@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from schedule.periods import Month
 from views import CalendarView, EventDetailView, MonthCalendarView, ToggleParticipation, PersonalCalendarView, EventCreateView, EventEditView
 
 
