@@ -141,5 +141,5 @@ ADMIN_LOGIN_URL = 'login/'
 
 AUTH_USER_MODEL = 'sentry.User'
 
-DATABASES = []
+DATABASES = dict()
 DATABASES['default'] = dj_database_url.config()
