@@ -141,4 +141,4 @@ ADMIN_LOGIN_URL = 'login/'
 AUTH_USER_MODEL = 'sentry.User'
 
 import django_heroku
-django_heroku.configure(locals())
+django_heroku.settings(locals())
