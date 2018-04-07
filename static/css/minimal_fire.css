@@ -12,6 +12,10 @@ input {
     transition: border-color 0.5s ease-out;
 }
 
+li {
+    list-style: none;
+}
+
 .login-input {
      text-align: center !important;
 }
@@ -124,5 +128,51 @@ a {
 .btn-paritcipant {
     position: relative;
     width: 100%;
+}
+
+.widget {
+    float: left;
+    text-align: right;
+    border-bottom: 1px solid orangered;
+    padding: 10px;
+    color: orangered;
+    width: 30%;
+    margin: 15px;
+    position: relative;
+    padding-top: 30%;
+
+    webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+
+.widget hr {
+    border-color: white;
+
+    webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+
+.widget:hover {
+    background-color: orangered;
+    color: #FFFFFF;
+
+    webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+
+.widget:hover a {
+    color: #FFFFFF;
+
+    webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+
 }
 

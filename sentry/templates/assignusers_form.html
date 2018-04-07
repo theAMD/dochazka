@@ -1,16 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base_content.html' %}
 {% load static %}
 
-
-
-{% block body %}
-    {% with formset=form %}
+{% block content %}
+    <form method="post" action="{{ request.url }}">
+    {% if form.errors %}
+        {{ form.error }}
+    {% endif %}
+    {% csrf_token %}
+    {% if not user_id %}
+        {% with formset=form %}
+        {{ formset.management_form }}
         {% for form in formset %}
             {{ form.instance.username }}:
+            <br />
             {{ form }}
             <br />
         {% endfor %}
-    {% endwith %}
+        {% endwith %}
+    {% else %}
+        {{ form.mana }}
+        {{ form.instance.username }}
+        {{ form }}
+    {% endif %}
+        <input type="submit" class="btn btn success">
+    </form>
 {% endblock %}
 
 

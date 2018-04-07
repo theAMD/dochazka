@@ -2,10 +2,9 @@ from allaccess.models import Provider
 from allaccess.views import OAuthCallback, OAuthRedirect
 from django.contrib.auth import get_user_model, views, mixins
 from django.core.urlresolvers import reverse
-from django.views.generic import TemplateView, FormView
-from django.forms import modelformset_factory
+from django.views.generic import TemplateView, FormView, UpdateView
 from people.models import Person
-from sentry.forms import AssignUserIdentityFormset
+from sentry.forms import AssignUserIdentityFormset, AssignUserIdentityForm
 from sentry.models import User
 from dal import autocomplete
 from django.db.models import Q
@@ -42,11 +41,26 @@ class WPProviderRedirect(OAuthRedirect):
 
 class AssignUsersFormView(mixins.LoginRequiredMixin, FormView):
     template_name = 'assignusers_form.html'
+    success_url = '/'
 
     def get_form(self, form_class=None):
-        person_user_formset = AssignUserIdentityFormset(queryset=User.objects.filter(person=None))
-        return person_user_formset
+        if self.kwargs.get('user_id', False):
+            form = AssignUserIdentityForm(instance=User.objects.filter(id=self.kwargs['user_id']).get(),
+                                          **self.get_form_kwargs())
+        else:
+            form = AssignUserIdentityFormset(queryset=User.objects.filter(person=None), **self.get_form_kwargs())
 
+        return form
+
+    def get_context_data(self, **kwargs):
+        ctx = super(AssignUsersFormView, self).get_context_data()
+        if self.kwargs.get('user_id', False):
+            ctx['user_id'] = self.kwargs['user_id']
+        return ctx
+
+    def form_valid(self, form):
+        form.save()
+        return super(AssignUsersFormView, self).form_valid(form )
 
 class UnassignedUserView(TemplateView):
     template_name = "unassigned.html"

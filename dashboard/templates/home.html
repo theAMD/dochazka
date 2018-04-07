@@ -1,5 +1,19 @@
 {% extends "base_content.html" %}
 
+
 {% block content %}
-    YAY
+    {% for widget in widgets %}
+        <div>
+            <div class="widget" style="max-height: 33%; max-width: 33%; overflow: hidden">
+            <div style="position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;">
+            {{ widget.render | safe }}
+            </div>
+            </div>
+        </div>
+
+    {% endfor %}
 {% endblock %}

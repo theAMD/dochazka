@@ -1,0 +1,31 @@
+<div style="position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 10px">
+<h1 style="text-align: left">Nejbližší akce</h1>
+<hr />
+{% if events %}
+    {% if firstEventIsToday %}
+        {% with first_event=events|first %}
+        <a href="{% url 'attendance:event.detail' first_event.id%}">
+            <div class="activeEvent">
+                <span style="font-size: 3.5em">{{ first_event.name }}</span>
+                <br />
+                <span style="font-size: 2em">{{ first_event.start|date:"H:i" }} - {{ first_event.end|date:"H:i" }}</span>
+            </div>
+        </a>
+        <hr />
+        {% endwith %}
+    {% endif %}
+    <ul>
+    {% for event in events %}
+        <a href="{% url 'attendance:event.detail' event.id%}">
+            <li style="list-style: none; font-size: 1.5em">{{ event.name }} - {{ event.start|date:"D d.m"|capfirst }}</li>
+        </a>
+    {% endfor %}
+    </ul>
+
+{% endif %}
+</div>

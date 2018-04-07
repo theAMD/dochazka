@@ -30,8 +30,40 @@
 .day {
     padding: 0px !important;
 }
-.day-container {
 
+.day-container:hover > .calendar_newEventLink {
+    visibility: visible;
+    /*float: none;*/
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    flex-direction: column;
+}
+.calendar_newEventLink {
+    width: 100%;
+    visibility: hidden;
+    text-align: center;
+    padding-top: 20%;
+    text-decoration: none !important;
+}
+
+.calendar_newEventLink:hover .calendar_newEventLink:focus {
+    text-decoration: none;
+}
+
+.calendar_newEventLink > .fa {
+    font-size: 3em;
+}
+
+
+.day-container {
+    display: flex;
+
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 .event {

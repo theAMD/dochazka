@@ -24,31 +24,35 @@
             <tr>
             {% for day, events in week.items %}
                 <td class="day">
-                    <div>
-                    <a href="{% url 'attendance:event.create' %}{% if calendar %}?calendar={{ calendar.id }}{% endif %}">
-                    <a href="{% url 'attendance:event.create' %}{% if calendar %}?calendar={{ calendar.id }}{% endif %}">
-                        {% if day.month == month.firstDay.month %}
-                            <div class="pull-right">
-                                {{ day|date:"d" }}
-                            </div>
-                        {% else %}
-                            <div class="pull-right  text-muted">
-                                {{ day|date:"d" }}
-                            </div>
-                        {% endif %}
-                    </a>
+                    <div class="day-container">
+                        <a href="{% url 'attendance:event.create' %}{% if calendar %}?calendar={{ calendar.id }}{% endif %}">
+                            {% if day.month == month.firstDay.month %}
+                                <div style="text-align: right;">
+                                    {{ day|date:"d" }}
+                                </div>
+                            {% else %}
+                                <div class="text-muted" style="text-align: right;">
+                                    {{ day|date:"d" }}
+                                </div>
+                            {% endif %}
+                        </a>
+                        {% for event in events %}
+                            {% if event.multiday %}
+                                <a href="{% url 'attendance:event.detail' event.pk %}"><div class="btn event multiday" style="background-color: #{{ event.calendar.color }}">
+                                        {{ event.start|date:"H:m" }} <span class="font-weight-bold">{{ event }}</span>
+                                    </div></a>
+                            {% else %}
+                                <a href="{% url 'attendance:event.detail' event.pk %}"><div class="event" style="color: #{{ event.calendar.color }}">
+                                        <div class="event-dot"></div> {{ event.start|date:"H:m" }} <span class="font-weight-bold">{{ event }}</span>
+                                    </div></a>
+                            {% endif %}
+                        {% endfor %}
+                        <a href="{% url 'attendance:event.create' %}{% if calendar %}?calendar={{ calendar.id }}{% endif %}" style="color: lightgrey" class="calendar_newEventLink">
+                            <i class="fa fa-plus-circle"></i>
+                            <br />
+                            nová akce
+                        </a>
                     </div>
-                    {% for event in events %}
-                        {% if event.multiday %}
-                            <a href="{% url 'attendance:event.detail' event.pk %}"><div class="btn event multiday" style="background-color: #{{ event.calendar.color }}">
-                                    {{ event.start|date:"H:m" }} <span class="font-weight-bold">{{ event }}</span>
-                                </div></a>
-                        {% else %}
-                            <a href="{% url 'attendance:event.detail' event.pk %}"><div class="event" style="color: #{{ event.calendar.color }}">
-                                    <div class="event-dot"></div> {{ event.start|date:"H:m" }} <span class="font-weight-bold">{{ event }}</span>
-                                </div></a>
-                        {% endif %}
-                    {% endfor %}
                 </td>
             {% endfor %}
             </tr>

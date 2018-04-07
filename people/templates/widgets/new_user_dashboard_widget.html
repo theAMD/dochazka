@@ -1,0 +1,23 @@
+<div style="padding: 10px">
+{% if users|length == 0%}
+    <h1 style="text-align: left; ">Uživatelé bez osoby</h1>
+    <hr />
+
+{% else %}
+    <a href="{% url "sentry:users" %}">
+        <h1 style="text-align: left; ">Uživatelé bez osoby</h1>
+    </a>
+    <hr />
+    <ul>
+    {% for user in users %}
+        <a href="{% url 'sentry:users' user.id %}">
+            <li style="font-size: 1.5em">
+                {{ user }}
+                <i class="fa fa-user-circle-o"></i>
+            </li>
+        </a>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+</div>
