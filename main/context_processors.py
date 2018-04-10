@@ -28,7 +28,7 @@ def menu_generator(request):
     # ]
     today = date.today()
     menu = [
-        {'icon': 'tachometer-alt', 'url': reverse('home'), 'text': 'dashing'},
+        {'icon': 'tachometer', 'url': reverse('home'), 'text': 'dashing'},
 
     ]
 

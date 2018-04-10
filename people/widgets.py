@@ -3,7 +3,7 @@ from sentry.models import User
 from django.shortcuts import render
 
 
-class NewUsersDasboardWidget(DashboardWidget):
+class NewUsersDashboardWidget(DashboardWidget):
     users = None
 
     def __init__(self, request):
