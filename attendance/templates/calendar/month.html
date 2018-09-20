@@ -39,11 +39,11 @@
                         {% for event in events %}
                             {% if event.multiday %}
                                 <a href="{% url 'attendance:event.detail' event.pk %}"><div class="btn event multiday" style="background-color: #{{ event.calendar.color }}">
-                                        {{ event.start|date:"H:m" }} <span class="font-weight-bold">{{ event }}</span>
+                                        {{ event.start|date:"H:i" }} <span class="font-weight-bold">{{ event }}</span>
                                     </div></a>
                             {% else %}
                                 <a href="{% url 'attendance:event.detail' event.pk %}"><div class="event" style="color: #{{ event.calendar.color }}">
-                                        <div class="event-dot"></div> {{ event.start|date:"H:m" }} <span class="font-weight-bold">{{ event }}</span>
+                                        <div class="event-dot"></div> {{ event.start|date:"H:i" }} <span class="font-weight-bold">{{ event }}</span>
                                     </div></a>
                             {% endif %}
                         {% endfor %}
