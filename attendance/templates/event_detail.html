@@ -8,8 +8,8 @@
 {% block content %}
     <h1>{{ event.name }} - {{ event.calendar.name }}</h1>
     <ul>
-        <li>{{ event.start|date:"d.m Y H:m" }}</li>
-        <li>{{ event.end|date:"d.m Y H:m" }}</li>
+        <li>{{ event.start|date:"d.m Y H:i" }}</li>
+        <li>{{ event.end|date:"d.m Y H:i" }}</li>
     </ul>
 
     <a href="{% url 'attendance:event.edit' event.pk %}">
@@ -38,13 +38,24 @@
                     <a class="col-md-4" href="{% url 'attendance:toggleParticipation' participation.pk %}?back={{ request.path }}">
                          <div class="btn btn-secondary {% if participation.status %}btn-success{% endif %} btn-paritcipant">
                         {{ participation.person }}
+                         <br />
+                         {% if participation.status %}
+                             (došel)
+                         {% else %}
+                             (nedošel)
+                         {% endif %}
+
                         </div>
                     </a>
-
                 {% else %}
                     <div class="col-md-4">
                          <div class="col-md-4 btn btn-secondary {% if participation.status %}btn-success{% endif %}">
                         {{ participation.person }}
+                          {% if participation.status %}
+                             (došel)
+                         {% else %}
+                             (nedošel)
+                         {% endif %}
                         </div>
                     </div>
 

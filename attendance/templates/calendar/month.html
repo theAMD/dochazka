@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% if calendar %}{{ calendar }} -{% endif %} {{ month.firstDay|date:"F"|capfirst }} {{ month.firstDay|date:"Y"|capfirst }}</h1>
+    <h1>{% if calendar %}{{ calendar.unit.name }} -{% endif %} {{ month.firstDay|date:"F"|capfirst }} {{ month.firstDay|date:"Y"|capfirst }}</h1>
     <br/>
     <a href="{% url 'attendance:monthCalendar' month.slug month.prevMonth|date:"Y" month.prevMonth|date:"m" %}"><<</a>
     <br />

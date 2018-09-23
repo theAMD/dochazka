@@ -7,6 +7,9 @@ class User(AbstractUser):
     person = models.ForeignKey(Person, null=True, blank=True)
 
     def __unicode__(self):
+        return self.__str__()
+
+    def __str__(self):
         if self.person:
             if self.person.nickname:
                 return self.person.nickname
