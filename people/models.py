@@ -14,9 +14,6 @@ class Person(models.Model):
         return self.__unicode__()
 
     def __unicode__(self):
-        return self.__str__()
-
-    def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
     def member_in_units(self):
@@ -56,9 +53,6 @@ class Unit(models.Model):
         return parents
 
     def __unicode__(self):
-        return self.__str__()
-
-    def __str__(self):
         return u"%s (%s)" % (self.name, self.type.name)
 
 
@@ -67,7 +61,4 @@ class UnitType(models.Model):
     weight = models.PositiveIntegerField()
 
     def __unicode__(self):
-        return self.__unicode__()
-
-    def __str__(self):
         return u"%s (%d)" % (self.name, self.weight)

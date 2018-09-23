@@ -12,9 +12,6 @@ class Calendar(models.Model):
     unit = models.OneToOneField('people.Unit', related_name='calendar')
 
     def __unicode__(self):
-        return self.__str__()
-
-    def __str__(self):
         return self.name
 
     def getEvents(self, start = None, end = None):
@@ -37,9 +34,6 @@ class Event(models.Model):
     calendar = models.ForeignKey('Calendar', related_name='event_set')
 
     def __unicode__(self):
-        return self.__str__()
-
-    def __str__(self):
         return self.name
 
     def ended(self):
@@ -56,9 +50,6 @@ class Participation(models.Model):
     status = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.__str__()
-
-    def __str__(self):
         return self.event.__unicode__() + ' ' + self.person.__unicode__()
 
     def toggle(self):
