@@ -1,0 +1,16 @@
+/* This Awesome CSS file was created by Font Orgranizer from Hive :) */
+
+
+@font-face {
+    font-family: 'TheMix';
+    src: url('/static/fonts/TheMixC5-4_SemiLight.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TheMixBold';
+    src: url('/static/fonts/TheMixC5-7_Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
