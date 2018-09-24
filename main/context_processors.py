@@ -3,6 +3,7 @@ from django.shortcuts import reverse
 from datetime import date
 from attendance.models import Calendar
 
+
 def menu_generator(request):
     #
     # Three level example menu
@@ -35,10 +36,10 @@ def menu_generator(request):
     try:
         if request.user.person:
             calendars = [{
-                    'icon': 'calendar',
-                    'url': reverse('attendance:calendar', kwargs={'calendar_slug': 'personal'}),
-                    'text': u'Můj kalendář'
-                }]
+                'icon': 'calendar',
+                'url': reverse('attendance:calendar', kwargs={'calendar_slug': 'personal'}),
+                'text': u'Můj kalendář'
+            }]
             for calendar in Calendar.objects.filter(unit__in=request.user.person.member_in_units()):
                 calendars.append({
                     'icon': 'calendar',
@@ -47,9 +48,9 @@ def menu_generator(request):
                 })
 
             menu.append(
-                {'icon': 'calendar', 'url': "#", 'text': u'Kalendáře', 'submenu': calendars }
+                {'icon': 'calendar', 'url': "#", 'text': u'Kalendáře', 'submenu': calendars}
             )
-    except:
+    except Exception as e:
         pass
 
     return {'menu': menu}

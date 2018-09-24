@@ -1,4 +1,6 @@
 .idea/
 staticfiles/
 *.sqlite3
-*.pyc
+
+
+main/devel_settings.py
