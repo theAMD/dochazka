@@ -1,7 +1,7 @@
 certifi==2018.1.18
 chardet==3.0.4
 dj-database-url==0.5.0
-Django==1.11
+Django==1.11.15
 django-all-access==0.9.0
 django-autocomplete-light==3.2.10
 django-heroku==0.3.1
@@ -20,10 +20,10 @@ pyasn1==0.4.2
 pyasn1-modules==0.2.1
 pycrypto==2.6.1
 pytz==2018.3
-requests==2.18.4
+requests==2.20.0
 requests-oauthlib==0.8.0
 rsa==3.4.2
 six==1.11.0
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.23
 whitenoise==3.3.1
