@@ -1,5 +1,6 @@
 from django.conf.urls import url
-from views import CalendarView, EventDetailView, MonthCalendarView, ToggleParticipation, PersonalCalendarView, EventCreateView, EventEditView
+from attendance.views import CalendarView, EventDetailView, MonthCalendarView, ToggleParticipation, \
+    PersonalCalendarView, EventCreateView, EventEditView
 
 
 

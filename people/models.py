@@ -8,12 +8,14 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
     nickname = models.CharField(max_length=30, null=True, blank=True)
     membership = models.ManyToManyField("Unit", related_name="members")
-
     @property
     def name(self):
         return self.__unicode__()
 
     def __unicode__(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
+    def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
     def member_in_units(self):
@@ -55,6 +57,9 @@ class Unit(models.Model):
     def __unicode__(self):
         return u"%s (%s)" % (self.name, self.type.name)
 
+    def __str__(self):
+        return u"%s (%s)" % (self.name, self.type.name)
+
 
 class UnitType(models.Model):
     name = models.CharField(max_length=30)
@@ -62,3 +67,6 @@ class UnitType(models.Model):
 
     def __unicode__(self):
         return u"%s (%d)" % (self.name, self.weight)
+
+    def __str__(self):
+        return self.__unicode__()

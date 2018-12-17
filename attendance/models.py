@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Calendar(models.Model):
     name = models.TextField(max_length=30)
-    slug = models.SlugField(max_length=30)
+    slug = models.SlugField(max_length=30, unique=True)
     color = models.TextField(max_length=6, null=True, blank=True)
     parent = models.ForeignKey('Calendar', null=True, blank=True)
     gcal_id = models.TextField(null=True, blank=True)
@@ -13,6 +13,10 @@ class Calendar(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def __str__(self):
+        return self.name
+
 
     def getEvents(self, start = None, end = None):
         events = Event.objects.filter(calendar=self)
@@ -36,6 +40,9 @@ class Event(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
     def ended(self):
         return self.end < timezone.now()
 
@@ -51,6 +58,9 @@ class Participation(models.Model):
 
     def __unicode__(self):
         return self.event.__unicode__() + ' ' + self.person.__unicode__()
+
+    def __unicode__(self):
+        return self.event.__str__() + ' ' + self.person.__str__()
 
     def toggle(self):
         self.status = not self.status

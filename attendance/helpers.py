@@ -15,7 +15,6 @@ class MonthHelper():
     prevMonth = None
 
     def __init__(self, calendar, year, month):
-        print calendar
         if not isinstance(calendar, list):
             self.calendar = [calendar]
             self.slug = calendar.slug

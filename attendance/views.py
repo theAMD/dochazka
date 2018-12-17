@@ -3,7 +3,7 @@ from attendance.models import Calendar, Event, Participation
 from .helpers import MonthHelper, EventHelper
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
-from forms import EventForm
+from attendance.forms import EventForm
 from datetime import datetime
 
 
@@ -13,7 +13,6 @@ class CalendarView(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         today =  datetime.today()
-        print self.kwargs
         return reverse('attendance:monthCalendar', kwargs={'calendar_slug': self.kwargs['calendar_slug'], 'year': today.strftime('%Y'), 'month': today.strftime('%m')})
 
 

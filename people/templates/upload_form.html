@@ -1,0 +1,21 @@
+<form action="/people/import/csv" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Gogogo!"/>
+</form>
+
+{% if imported %}
+    <ul>
+        {% for unit in imported %}
+            <li>{{ unit }}
+                <ul>
+                    {% for person in unit.get_members %}
+                        <li>{{ person }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+{% endif %}

@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^login/', include('sentry.urls', namespace='sentry')),
     url(r'^logout/', LogoutView.as_view(), name='logout'),
     url(r'^attendance/', include('attendance.urls', namespace='attendance')),
+    url(r'^people/', include('people.urls', namespace='people')),
 
 
 ]

@@ -8,6 +8,7 @@ from sentry.forms import AssignUserIdentityFormset, AssignUserIdentityForm
 from sentry.models import User
 from dal import autocomplete
 from django.db.models import Q
+from allaccess.views import OAuthRedirect
 
 
 class LoginView(views.LoginView):
@@ -15,21 +16,45 @@ class LoginView(views.LoginView):
 
     def get_context_data(self, **kwargs):
         ctx = super(LoginView, self).get_context_data()
-        ctx['auth_providers'] = Provider.objects.exclude(consumer_key=None, consumer_secret=None)
+        ctx['auth_providers'] = list()
+        providers = Provider.objects.exclude(consumer_key=None, consumer_secret=None)
+        for provider in providers:
+            providerName = provider.name.lower()
+            if 'wordpress' in providerName:
+                iconClass = 'wordpress'
+            elif 'google' in providerName:
+                iconClass = 'google'
+            else:
+                iconClass = 'user'
+
+            ctx['auth_providers'].append({'provider': provider, 'iconClass': iconClass})
         return ctx
 
 
 class WPProviderCallbackView(OAuthCallback):
-    provider_id = 'ID'
+
+    def get(self, request, *args, **kwargs):
+        if 'wordpress' in kwargs.get('provider', '').lower():
+            self.provider_id = 'ID'
+        return super(WPProviderCallbackView, self).get(request, *args, **kwargs)
 
     def get_or_create_user(self, provider, access, info):
         "Create a shell auth.User."
         User = get_user_model()
-        kwargs = {
-            User.USERNAME_FIELD: provider.name + '_' + info['user_login'],
-            'email': info['user_email'],
-            'password': None
-        }
+
+        if 'google' in provider.name.lower():
+            kwargs = {
+                User.USERNAME_FIELD: provider.name + '_' + info['given_name']
+                                     + '_' + info['family_name'],
+                'password': None
+            }
+        else:
+            kwargs = {
+                User.USERNAME_FIELD: provider.name + '_' + info['user_login'],
+                'email': info['user_email'],
+                'password': None
+            }
+
         return User.objects.create_user(**kwargs)
 
 
@@ -37,6 +62,13 @@ class WPProviderRedirect(OAuthRedirect):
     def get_callback_url(self, provider):
         "Return the callback url for this provider."
         return reverse('sentry:callback', kwargs={'provider': provider.name})
+
+    def get_additional_parameters(self, provider):
+        if 'google' in provider.name.lower():
+            perms = ['userinfo.profile']
+            scope = ' '.join(['https://www.googleapis.com/auth/' + p for p in perms])
+            return {'scope': scope}
+        return super(WPProviderRedirect, self).get_additional_parameters(provider)
 
 
 class AssignUsersFormView(mixins.LoginRequiredMixin, FormView):
@@ -60,7 +92,8 @@ class AssignUsersFormView(mixins.LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-        return super(AssignUsersFormView, self).form_valid(form )
+        return super(AssignUsersFormView, self).form_valid(form)
+
 
 class UnassignedUserView(TemplateView):
     template_name = "unassigned.html"

@@ -23,7 +23,8 @@
         </form>
         <div class="providers pull-left">
             {% for provider in auth_providers %}
-                <a href="{% url 'sentry:externalLogin' provider.name %}"><i class="fa fa-wordpress"></i></a>
+                <a href="{% url 'sentry:externalLogin' provider.provider.name %}"><i
+                        class="fa fa-{{ provider.iconClass }}"></i></a>
             {% endfor %}
         </div>
     </div>
